@@ -6,9 +6,10 @@
 **************************/
 
 body {
-  background: #fff;
+  background: #FFD700;
   font-family: 'Open Sans', sans-serif;
-  color:#4e4e4e;
+  color:#000000;
+  font-weight:bold;
   line-height: 22px;
 }
 
@@ -289,8 +290,8 @@ input.search-form:hover {
 }
 
 .navbar-inverse .navbar-nav > li > a:hover{
-	background-color: #c52d2f;
-  color: #fff;
+	background-color: #FFD700;
+  color:#000000;
 }
 
 .navbar-inverse {
@@ -309,8 +310,8 @@ input.search-form:hover {
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
-  background-color: #c52d2f;
-  color: #fff;
+  background-color:#FFD700;
+  color: #000;
 }
 
 .navbar-inverse .navbar-nav .dropdown-menu {
@@ -1935,7 +1936,7 @@ ul.social_icons li  a i{
 
 .form-group .form-control {
   padding: 7px 12px;
-  border-color:#f2f2f2;
+  border-color:#666666;
   box-shadow: none;
 }
 
@@ -2523,9 +2524,4 @@ shortcodes page css
 #footer ul > li {
   display: inline-block;
   margin-left: 15px;
-}
-
-
-input{
-border: 1px solid gray;
 }

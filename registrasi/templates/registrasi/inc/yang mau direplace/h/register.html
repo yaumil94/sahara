@@ -1,0 +1,108 @@
+{% extends 'saharasite/base_site.html' %}
+{% load staticfiles %}
+
+{% block plugin_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'plugin/daterangepicker.css' %}" />
+{% endblock %}
+
+{% block plugin_js %}
+<script type="text/javascript" src="{% static 'plugin/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugin/daterangepicker.js' %}"></script>
+{% endblock %}
+
+{% block plugin_js_embed %}
+<script type="text/javascript">
+$(function() {
+    $('input[name="tanggal_lahir"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true
+    },
+    function(start, end, label) {
+        var years = moment().diff(start, 'years');
+        alert("You are " + years + " years old.");
+    });
+});
+</script>
+{% endblock %}
+
+{% block title %}
+Sahara - Registrasi
+{% endblock %}
+
+{% block content %}
+<section id="contact-info">
+<div class="center">
+    <h2><b>Registrasi Member, Sekarang !</b></h2>
+    <p class="lead">Sahabat Usaha Rakyat "SAHARA"</p>
+</div>
+<div class="row contact-wrap">
+<form class='contact-form'>
+{% csrf_token %}
+    <div class="col-sm-5 col-sm-offset-1">
+    <div class='form-group'>
+        {{ form.nomer.label }}
+        {{ form.nomer }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.nama.label }}
+        {{ form.nama }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.tempat_lahir.label }}
+        {{ form.tempat_lahir }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.tanggal_lahir.label }}
+        {{ form.tanggal_lahir }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.email.label }}
+        {{ form.email }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.handphone.label }}
+        {{ form.handphone }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.wilayah.label }}
+        {{ form.wilayah }}
+    </div>
+
+    </div>
+
+    <!-- bagian 2 -->
+    <div class="col-sm-5">
+    <div class='form-group'>
+        {{ form.alamat.label }}
+        {{ form.alamat }}
+    </div>
+
+    <div class='form-group'>
+        {{ form.pembayaran.label }}
+        {{ form.pembayaran }}
+    </div>
+
+
+        {{ form.jenis_kelamin.label }}
+        <label class="checkbox inline">
+        <input class="form" id="id_jenis_kelamin_0" name="jenis_kelamin" type="radio" value="P"><strong>Pria</strong>
+        <p><input class="form" id="id_jenis_kelamin_0" name="jenis_kelamin" type="radio" value="W"><strong>Wanita</strong>
+        </label>
+        
+    <div class='form-group'>
+        {{ form.paket_sahara.label }}
+        {{ form.paket_sahara }}
+    </div>
+
+
+    </div>
+</form>
+</div>
+</section>
+{% endblock %}
