@@ -1,0 +1,201 @@
+{% extends 'registrasi/base_site.html' %}
+{% load staticfiles %}
+
+{% block plugin_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'plugin/daterangepicker.css' %}" />
+{% endblock %}
+
+{% block plugin_js %}
+<script type="text/javascript" src="{% static 'plugin/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugin/daterangepicker.js' %}"></script>
+{% endblock %}
+
+{% block plugin_js_embed %}
+<script type="text/javascript">
+$(function() {
+    $('input[name="tanggal_lahir"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true
+    },
+    function(start, end, label) {
+        var years = moment().diff(start, 'years');
+        alert("You are " + years + " years old.");
+    });
+});
+</script>
+{% endblock %}
+
+{% block title %}
+Sahara - Registrasi
+{% endblock %}
+
+{% block content %}
+<section id="contact-info">
+
+<div class="center">
+    <h2>Registrasi Member, Sekarang !</h2>
+    <p class="lead">Sahabat Usaha Rakyat "SAHARA".</p>
+    {% if messages %}
+    {% for msg in messages %}
+        <div class="alert alert-{{msg.level_tag}}" role="alert">
+ 	{{msg.message}}
+	</div>
+    {% endfor %}
+{% endif %}
+</div>
+<div class="row contact-wrap">
+<form class='contact-form' method='post'>
+{% csrf_token %}
+    <div class="col-sm-5 col-sm-offset-1">
+
+
+
+    <div class='form-group'>
+        {{ form.nama.label }}
+        {{ form.nama }}
+
+        <p class="text-danger">
+        {% if form.nama.errors %}
+        {% for error in form.nama.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    <div class='form-group'>
+        {{ form.tempat_lahir.label }}
+        {{ form.tempat_lahir }}
+        <p class="text-danger">
+        {% if form.tempat_lahir.errors %}
+        {% for error in form.tempat_lahir.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    <div class='form-group'>
+        {{ form.tanggal_lahir.label }}
+        {{ form.tanggal_lahir }}
+        <p class="text-danger">
+        {% if form.tanggal_lahir.errors %}
+        {% for error in form.tanggal_lahir.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    <div class='form-group'>
+        {{ form.email.label }}
+        {{ form.email }}
+        <p class="text-danger">
+        {% if form.email.errors %}
+        {% for error in form.email.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+        <div class='form-group'>
+        {{ form.nomor_hp.label }}
+        {{ form.nomor_hp }}
+        <p class="text-danger">
+        {% if form.nomor_hp.errors %}
+        {% for error in form.nomer.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+
+    <div class='form-group'>
+        {{ form.handphone.label }}
+        {{ form.handphone }}
+        <p class="text-danger">
+        {% if form.handphone.errors %}
+        {% for error in form.handphone.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    <div class='form-group'>
+        {{ form.wilayah.label }}
+        {{ form.wilayah }}
+        <p class="text-danger">
+        {% if form.wilayah.errors %}
+        {% for error in form.wilayah.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    </div>
+
+    <!-- bagian 2 -->
+    <div class="col-sm-5">
+    <div class='form-group'>
+        {{ form.alamat.label }}
+        {{ form.alamat }}
+        <p class="text-danger">
+        {% if form.alamat.errors %}
+        {% for error in form.alamat.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    <div class='form-group'>
+        {{ form.pembayaran.label }}
+        {{ form.pembayaran }}
+        <p class="text-danger">
+        {% if form.pembayaran.errors %}
+        {% for error in form.pembayaran.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+
+        {{ form.jenis_kelamin.label }}
+        <label class="checkbox inline">
+        {% for radio in form.jenis_kelamin %}
+            {{ radio }}
+        {% endfor %}
+
+        <p class="text-danger">
+        {% if form.jenis_kelamin.errors %}
+        {% for error in form.jenis_kelamin.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+        </label>
+
+    <div class='form-group'>
+        {{ form.paket.label }}
+        {{ form.paket }}
+        <p class="text-danger">
+        {% if form.paket.errors %}
+        {% for error in form.paket.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
+
+    <input type='submit' name='submit' value='Register' class='btn btn-primary btn-block' />
+
+    </div>
+</form>
+</div>
+</section>
+{% endblock %}

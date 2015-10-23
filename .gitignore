@@ -1,0 +1,8 @@
+*.pyc
+__pycache__
+saharasite
+administrator
+myvenv
+*.sqlite3
+/static
+.DS_Store
