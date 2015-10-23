@@ -47,7 +47,7 @@ class RegistrasiForm(ModelForm):
             'nomor_hp': TextInput(attrs={'class':'form-control'}),
             'tempat_lahir': TextInput(attrs={'class':'form-control'}),
             'tanggal_lahir': DateInput(attrs={'class':'form-control'}),
-            'jenis_kelamin': RadioSelect(attrs={'class':'form-control'}),
+            'jenis_kelamin': RadioSelect(attrs={'class':''}),
             'paket': Select(attrs={'class':'form-control'}),
             'pembayaran': Select(attrs={'class':'form-control'}),
         }
