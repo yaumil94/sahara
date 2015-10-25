@@ -5,25 +5,19 @@ from django.forms import Select
 from django.forms import EmailInput
 from django.forms import DateInput
 from django.forms import RadioSelect
+from django import forms
 
 from .models import Registrasi
+from .helpers.validation import validate_sponsor
 
-'''
-class FormRegistrasi(forms.Form):
-    nomer = forms.CharField(required=False,max_length=5,label='Nomer Urut', widget=forms.TextInput(attrs={'class':'form-control'}))
-    nama = forms.CharField(max_length=30, label='Nama', widget=forms.TextInput(attrs={'class':'form-control'}))
-    alamat = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control'}))
-    wilayah = forms.ChoiceField(label='kota', choices=wilayah_choices(), widget=forms.Select(attrs={'class':'form-control'}))
-    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class':'form-control'}))
-    handphone = forms.CharField(label='Nomer Handphone', max_length=16, widget=forms.TextInput(attrs={'class':'form-control'}))
-    tempat_lahir = forms.CharField(label='Tempat Lahir', max_length=30, widget=forms.TextInput(attrs={'class':'form-control'}))
-    tanggal_lahir = forms.CharField(label='Tanggal Lahir', widget=forms.DateInput(attrs={'class':'form-control'}))
-    pembayaran = forms.ChoiceField(choices=pembayaran_choices(), widget=forms.Select(attrs={'class':'form-control'}))
-    jenis_kelamin = forms.ChoiceField(choices=gender_choices(), widget=forms.RadioSelect(attrs={'class':'form-control'}))
-    paket_sahara = forms.ChoiceField(choices=paket_choices(), widget=forms.Select(attrs={'class':'form-control'}))
-'''
 
 class RegistrasiForm(ModelForm):
+    """
+    Form untuk registrasi member.
+    """
+    sponsor = forms.CharField(required=False,
+        widget=TextInput(attrs={'class':'form-control'}),
+        validators=[validate_sponsor])
 
     class Meta:
         model = Registrasi
@@ -35,7 +29,7 @@ class RegistrasiForm(ModelForm):
         ]
         # field yang tidak ditampilkan
         exlcude = [
-            'nomer_registrasi','status',
+            'nomor_registrasi','status',
             'tanggal_registrasi'
         ]
         # widget

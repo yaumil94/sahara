@@ -4,10 +4,9 @@ from django.contrib.auth.models import User
 
 class Paket(models.Model):
     """
-    Model Class Paket.
-
-    adalah tabel registrasi_paket yang digunakan
-    untuk menyimpan data-data berupa jenis-jenis paket.
+    Menyimpan data Paket. tabel untuk model ini
+    adalah **registrasi_paket** yang dijadikan
+    FK oleh `registrasi.Registrasi`.
     """
     kode_paket = models.CharField(max_length=4, primary_key=True)
     nama_paket = models.CharField(max_length=30)
@@ -29,10 +28,9 @@ class Paket(models.Model):
 
 class Pembayaran(models.Model):
     """
-    Model Class Pembayaran.
-
-    adalah tabel registrasi_pembayaran yang digunakan
-    untuk menyimpan data-data berupa jenis-jenis pembayaran.
+    Menyimpan data Jenis Pembayaran. tabel untuk model ini
+    adalah **registrasi_pembayaran** yang dijadikan
+    FK oleh `registrasi.Registrasi`.
     """
     kode_pembayaran = models.CharField(max_length=4, primary_key=True)
     jenis_pembayaran = models.CharField(max_length=30)
@@ -47,13 +45,15 @@ class Pembayaran(models.Model):
     class Meta:
         verbose_name_plural = "Master Jenis Pembayaran"
 
+
+
 class Wilayah(models.Model):
     """
-    Model Class Wilayah.
-
-    adalah tabel registrasi_wilayah
-    yang digunakan untuk menyimpan data wilayah.
+    Menyimpan data Wilayah. tabel untuk model ini
+    adalah **registrasi_wilayah** yang dijadikan
+    FK oleh `registrasi.Registrasi`.
     """
+
     kode_wilayah = models.CharField(max_length=4, primary_key=True)
     nama_wilayah = models.CharField(max_length=100, unique=True)
 
@@ -65,7 +65,12 @@ class Wilayah(models.Model):
         return self.nama_wilayah
 
     class Meta:
+        """
+        Merepresentasikan nama models
+        di aplikasi pada halaman administrator.
+        """
         verbose_name_plural = "Master Wilayah"
+
 
 
 class Registrasi(models.Model):
@@ -77,7 +82,7 @@ class Registrasi(models.Model):
     sudah di ceklis statusnya menjadi True
     akan menjadi member atau anggota.
     """
-    nomer_registrasi = models.CharField(max_length=10, unique=True, blank=True, null=True)
+    nomor_registrasi = models.CharField(max_length=10, unique=True, blank=True, null=True)
     nama = models.CharField(max_length=120)
     alamat = models.TextField()
     wilayah = models.ForeignKey(Wilayah)
@@ -95,6 +100,7 @@ class Registrasi(models.Model):
     status = models.BooleanField(default=False, blank=True)
     tanggal_registrasi = models.DateField(auto_now=True)
 
+
     def __str__(self):
         """
         Mengembalikan string 'nama' dari calon member
@@ -111,9 +117,25 @@ class Registrasi(models.Model):
     status_member.boolean = True
     status_member.short_description = "SUDAH MENJADI MEMBER ?"
 
+    def list_display_sponsor(self):
+        """
+        Mengembalikan nilai nomor_member sebagai
+        sponsor user yang masih dalam status register.
+        """
+        try:
+            sponsor = Sponsor.objects.get(nomor_registrasi=self)
+            if not sponsor.nomor_member:
+                return "--"
+            else:
+                return sponsor.nomor_member
+        except Sponsor.DoesNotExist:
+            return "--"
+    list_display_sponsor.short_description = "Sponsor"
+
     class Meta:
         verbose_name = "Calon Member"
         verbose_name_plural = "Data Calon Member (Registrasi)"
+
 
 class Member(models.Model):
     """
@@ -123,8 +145,9 @@ class Member(models.Model):
     registrasi dan sudah mendapat persetujuan
     oleh admin akan menjadi anggota member.
     """
-    nomor_member = models.CharField(max_length=11, primary_key=True)
-    registrasi = models.OneToOneField(Registrasi)
+    nomor_member = models.CharField(max_length=12, primary_key=True)
+    registrasi = models.ForeignKey(Registrasi)
+    #tanggal_menjadi_member = models.DateTimeField()
 
 
     def __str__(self):
@@ -132,8 +155,42 @@ class Member(models.Model):
         Mengembalikan string 'nama_member'
         ke halaman html.
         """
-        return self.nama_member
+        return self.nomor_member
+
+    def get_nomor_registrasi(self):
+        return self.registrasi.nomor_registrasi
+    get_nomor_registrasi.short_description = "Nomor Registrasi"
+
+    def list_display_banyak_member(self):
+        return self.sponsor_set.count()
+    list_display_banyak_member.short_description = "Jumlah Pengikut Member"
+
+    def list_display_sponsor(self):
+        """
+        Mengembalikan nilai nomor_member sebagai
+        sponsor user.
+        """
+        try:
+            sponsor = Sponsor.objects.get(nomor_registrasi=self.registrasi)
+            if not sponsor.nomor_member:
+                return "--"
+            else:
+                return sponsor.nomor_member
+        except Sponsor.DoesNotExist:
+            return "--"
+    list_display_sponsor.short_description = "Di Sponsori oleh"
 
     class Meta:
         verbose_name_plural = "Data Member"
 
+
+class Sponsor(models.Model):
+    nomor_registrasi = models.ForeignKey(Registrasi, blank=True, null=True)
+    nomor_member = models.ForeignKey(Member, help_text="Nomor ini sebagai nomor Sponsor Member", blank=True, null=True)
+    tanggal = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nomor_registrasi.nama
+
+    class Meta:
+        verbose_name_plural = "Sponsor"

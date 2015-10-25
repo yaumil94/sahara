@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Models &mdash; dokumentasi Sahara 1.0.0</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="dokumentasi Sahara 1.0.0" href="../index.html" />
+    <link rel="next" title="Views" href="views.html" />
+    <link rel="prev" title="Documentasi Sahara Registrasi Member" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="models">
+<h1>Models<a class="headerlink" href="#models" title="Link permanen untuk headline ini">¶</a></h1>
+<p>semua yang berkaitan dengan models schema database.</p>
+<span class="target" id="module-sahara.registrasi.models"></span><dl class="class">
+<dt id="sahara.registrasi.models.Member">
+<em class="property">class </em><code class="descclassname">sahara.registrasi.models.</code><code class="descname">Member</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Member" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Class untuk data member.</p>
+<p>seorang calon member yang sudah melakukan
+registrasi dan sudah mendapat persetujuan
+oleh admin akan menjadi anggota member.</p>
+<dl class="method">
+<dt id="sahara.registrasi.models.Member.list_display_sponsor">
+<code class="descname">list_display_sponsor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Member.list_display_sponsor" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Mengembalikan nilai nomor_member sebagai
+sponsor user.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sahara.registrasi.models.Paket">
+<em class="property">class </em><code class="descclassname">sahara.registrasi.models.</code><code class="descname">Paket</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Paket" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Menyimpan data Paket. tabel untuk model ini
+adalah <strong>registrasi_paket</strong> yang dijadikan
+FK oleh <cite>registrasi.Registrasi</cite>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="sahara.registrasi.models.Pembayaran">
+<em class="property">class </em><code class="descclassname">sahara.registrasi.models.</code><code class="descname">Pembayaran</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Pembayaran" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Menyimpan data Jenis Pembayaran. tabel untuk model ini
+adalah <strong>registrasi_pembayaran</strong> yang dijadikan
+FK oleh <cite>registrasi.Registrasi</cite>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="sahara.registrasi.models.Registrasi">
+<em class="property">class </em><code class="descclassname">sahara.registrasi.models.</code><code class="descname">Registrasi</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Registrasi" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Class untuk menyimpan data registrasi.</p>
+<p>registrasi digunakan untuk menyimpan
+data calon member. calon member yang
+sudah di ceklis statusnya menjadi True
+akan menjadi member atau anggota.</p>
+<dl class="method">
+<dt id="sahara.registrasi.models.Registrasi.list_display_sponsor">
+<code class="descname">list_display_sponsor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Registrasi.list_display_sponsor" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Mengembalikan nilai nomor_member sebagai
+sponsor user yang masih dalam status register.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sahara.registrasi.models.Registrasi.status_member">
+<code class="descname">status_member</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Registrasi.status_member" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Mengembalikan nilai bool untuk status calon member.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="sahara.registrasi.models.Sponsor">
+<em class="property">class </em><code class="descclassname">sahara.registrasi.models.</code><code class="descname">Sponsor</code><span class="sig-paren">(</span><em>id</em>, <em>nomor_registrasi</em>, <em>nomor_member</em>, <em>tanggal</em><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Sponsor" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="sahara.registrasi.models.Wilayah">
+<em class="property">class </em><code class="descclassname">sahara.registrasi.models.</code><code class="descname">Wilayah</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sahara.registrasi.models.Wilayah" title="Link permanen untuk definisi ini">¶</a></dt>
+<dd><p>Menyimpan data Wilayah. tabel untuk model ini
+adalah <strong>registrasi_wilayah</strong> yang dijadikan
+FK oleh <cite>registrasi.Registrasi</cite>.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="bab sebelum">Documentasi Sahara Registrasi Member</a></li>
+      <li>Next: <a href="views.html" title="bab berikutnya">Views</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Halaman Ini</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/models.txt"
+            rel="nofollow">Lihat Sumber</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Pencarian cepat</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Masukkan term pencarian atau nama modul, class atau fungsi.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Solahudin, Yanwar & Afdhal, Yaumil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="../_sources/modules/models.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

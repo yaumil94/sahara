@@ -47,7 +47,18 @@ Sahara - Registrasi
 {% csrf_token %}
     <div class="col-sm-5 col-sm-offset-1">
 
+    <div class='form-group'>
+        {{ form.sponsor.label }}
+        {{ form.sponsor }}
 
+        <p class="text-danger">
+        {% if form.sponsor.errors %}
+        {% for error in form.sponsor.errors %}
+            {{ error }} <br>
+        {% endfor %}
+        {% endif %}
+        </p>
+    </div>
 
     <div class='form-group'>
         {{ form.nama.label }}
